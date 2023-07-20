@@ -4,6 +4,8 @@ This project was inspired by the Netflix's article [Migrating Critical Traffic A
 
 Kube Replay watches Kubernetes logs to fetch the GET HTTP requests made at the specified container in realtime and replays it at a given HTTP target.
 
+![](imgs/diagram.png)
+
 Notes:
 - The log pattern should be specified so the Log Watcher matches correcly.
 - Kube Replay will use the current Kubernetes context (TODO: allow user to pass custom context)
