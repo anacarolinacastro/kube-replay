@@ -7,7 +7,18 @@ Kube Replay watches Kubernetes logs to fetch the GET HTTP requests made at the s
 ![](imgs/diagram.png)
 
 Notes:
-- The log pattern should be specified so the Log Watcher matches correcly.
+- The log pattern should be specified so the match uses named captures `PATH`, `VERB` and `CODE` so the Log Watcher matches the log line correcly. Ex:
+
+    - The regex
+    ```
+    /(\S+)\s+(\S+)\s+(\S+)\s+(\[.*?\])\s+"(?<VERB>\S+)\s+(?<PATH>\S+)\s+(\S+)"\s+(?<CODE>\S+)\s+(?<SIZE>\S+)\s+(\S+)\s+(\S+)/
+    ```
+
+    - Matching log line
+    ```
+    10.0.0.1 - - [20/Jul/2023:14:08:36 +0000] "GET /my-path HTTP/1.0" 200 123456 "-" "-"
+    ```
+
 - Kube Replay will use the current Kubernetes context (TODO: allow user to pass custom context)
 
 ## TODO

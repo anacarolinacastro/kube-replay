@@ -45,10 +45,10 @@ class KubeReplay
 
   def watch_requests
     kube_client.watch_pod_log(@pod, @namespace, container: @container) do |line|
-      match = line.match(/(\S+)\s+(\S+)\s+(\S+)\s+(\[.*?\])\s+"(\S+)\s+(\S+)\s+(\S+)"\s+(\S+)\s+(\S+)\s+(\S+)\s+(\S+)/)
-      if match
-        path = match[6]
-        status = match[8]
+      match = line.match(/(\S+)\s+(\S+)\s+(\S+)\s+(\[.*?\])\s+"(?<VERB>\S+)\s+(?<PATH>\S+)\s+(\S+)"\s+(?<CODE>\S+)\s+(?<SIZE>\S+)\s+(\S+)\s+(\S+)/)
+      if match && match['VERB'].eql?('GET')
+        path = match['PATH']
+        status = match['CODE']
 
         @heap.append(Request.new(path, status))
       end
