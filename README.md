@@ -26,7 +26,6 @@ Notes:
 - Add timeout to requests
 - Optionally write output to file
 - Allow to show only the failed requests at the STDOUT
-- Match only GET requests
 - Standardize regexp pattern to have match named groups
 - Show memory usage and requests heap size
 - STDIN commands to exit program instead of using Keyboard Interrupt (ctrl + shift + c)
